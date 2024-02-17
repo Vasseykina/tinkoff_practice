@@ -22,12 +22,12 @@ import static edu.java.bot.utils.Commands.UNTRACK;
 public class CommandService {
     private final TelegramBot bot;
 
-    private HashMap<Long, List<String>> links = new HashMap<>();
-    private HashMap<Long, String> commands = new HashMap<>();
+    public HashMap<Long, List<String>> links = new HashMap<>();
+    public HashMap<Long, String> commands = new HashMap<>();
 
-    private final String regexGitHub = "(https?://)?(www\\.)?github\\.com/\\S+";
-    private final String regexLinks = "(https?://)?(www\\.)?\\S+\\.\\S+";
-    String regexStackOverflow = "(https?://)?(www\\.)?stackoverflow\\.com/\\S+";
+    public final String regexGitHub = "(https?://)?(www\\.)?github\\.com/\\S+";
+    public final String regexLinks = "(https?://)?(www\\.)?\\S+\\.\\S+";
+    public String regexStackOverflow = "(https?://)?(www\\.)?stackoverflow\\.com/\\S+";
     private final String helpMessage = """
         /start -- зарегистрировать пользователя
         /help -- вывести окно с командами
@@ -99,7 +99,7 @@ public class CommandService {
             return;
         }
         if (userLinks.isEmpty()) {
-            botAnswer(chatId, "List is empty. To track links - /track ");
+            botAnswer(chatId, "List is empty. To track links - " + TRACK);
         } else {
             StringBuilder msg = new StringBuilder("Your added links: \n");
             for (String link : userLinks) {
