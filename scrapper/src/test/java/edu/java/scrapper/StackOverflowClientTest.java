@@ -1,4 +1,5 @@
 package edu.java.scrapper;
+
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
@@ -31,21 +32,21 @@ public class StackOverflowClientTest {
 
     @Test
     public void testGetGitHubResponse() {
-        // Настройка заглушки для запроса
+
         long questionId = 12345;
         String title = "Sample Question";
         OffsetDateTime lastActivityDate = OffsetDateTime.now();
 
         wireMockServer.stubFor(WireMock.get(WireMock.urlPathEqualTo("/questions/" + questionId))
-                .willReturn(WireMock.aResponse()
-                        .withStatus(200)
-                        .withHeader("Content-Type", "application/json")
-                        .withBody("{\"title\": \"" + title + "\", \"last_activity_date\": \"" + lastActivityDate.toString() + "\"}")));
+            .willReturn(WireMock.aResponse()
+                .withStatus(200)
+                .withHeader("Content-Type", "application/json")
+                .withBody("{\"title\": \"" + title + "\", \"last_activity_date\": \"" + lastActivityDate.toString() +
+                    "\"}")));
 
-        // Вызов метода и проверка ответа
         Mono<StackOverflowResponse> responseMono = stackOverflowClient.getStackOverflowResponse(questionId);
         responseMono.subscribe(response -> {
-            // Проверка данных
+
             assert response.getTitle().equals(title);
             assert response.getLastActivityDate().equals(lastActivityDate);
         });

@@ -1,4 +1,5 @@
 package edu.java.scrapper;
+
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
@@ -39,14 +40,12 @@ public class GitHubClientTest {
         String owner = "testOwner";
         String repoName = "testRepo";
 
-        // Configure stub for successful response
         wireMockServer.stubFor(WireMock.get(WireMock.urlPathEqualTo("/repos/" + owner + "/" + repoName))
             .willReturn(WireMock.aResponse()
                 .withStatus(HttpStatus.OK.value())
                 .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
                 .withBody("{\"name\": \"" + repoName + "\", \"updated_at\": \"2024-02-25T12:00:00Z\"}")));
 
-        // Test GitHubClient
         Mono<GitHubResponse> responseMono = gitHubClient.getGitHubResponse(owner, repoName);
 
         StepVerifier.create(responseMono)
@@ -59,11 +58,9 @@ public class GitHubClientTest {
         String owner = "testOwner";
         String repoName = "testRepo";
 
-        // Configure stub for failure response
         wireMockServer.stubFor(WireMock.get(WireMock.urlPathEqualTo("/repos/" + owner + "/" + repoName))
             .willReturn(WireMock.aResponse().withStatus(HttpStatus.NOT_FOUND.value())));
 
-        // Test GitHubClient failure
         Mono<GitHubResponse> responseMono = gitHubClient.getGitHubResponse(owner, repoName);
 
         StepVerifier.create(responseMono)
