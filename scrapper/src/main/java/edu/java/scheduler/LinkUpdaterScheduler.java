@@ -1,0 +1,14 @@
+package edu.java.scheduler;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.stereotype.Component;
+
+@Slf4j
+@Component
+@EnableScheduling
+@ConditionalOnProperty(name = "app.scheduler.enable")
+public class LinkUpdaterScheduler {
+
+}

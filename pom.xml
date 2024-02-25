@@ -59,7 +59,7 @@
             </dependency>
             <dependency>
                 <groupId>org.wiremock</groupId>
-                <artifactId>wiremock</artifactId>
+                <artifactId>wiremock-standalone</artifactId>
                 <version>${wiremock.version}</version>
             </dependency>
 
@@ -116,12 +116,6 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>3.11.2</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -277,7 +271,6 @@
                     </executions>
                 </plugin>
                 <plugin>
-                    <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-checkstyle-plugin -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-checkstyle-plugin</artifactId>
                     <version>${maven-checkstyle-plugin.version}</version>
